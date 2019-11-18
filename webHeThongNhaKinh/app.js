@@ -73,3 +73,6 @@ routes(app, passport)
 var mqttClient = require('./api/mqtt/mqtt')
 mqttClient(io, client)
 
+// setup db CbAs
+var CbAs = require('./api/controllers/setupCbAs')
+CbAs(app)
