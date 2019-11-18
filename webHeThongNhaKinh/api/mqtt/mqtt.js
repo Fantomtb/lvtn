@@ -1,3 +1,5 @@
+var cbAsController = require('../controllers/cbAsController')
+
 module.exports = function (io, client) {
 
     //#region Listen from View to Server and publish from Server to STM
@@ -30,6 +32,7 @@ module.exports = function (io, client) {
         client.on('message', function (topic, dataClient) {
             if (topic == 'nhietDoH') {
                 var dataSocket = dataClient.toString()
+                cbAsController(dataSocket)
                 // console.log(dataSocket)
                 io.emit('nhietDoSV', dataSocket)
             }
