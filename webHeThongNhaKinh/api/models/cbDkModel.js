@@ -6,6 +6,7 @@ var cbDkSchema = new Schema({
     chiSo: String,
     day: String,
     time: String,
+    viTri:String,
 })
 
 var cbDk = mongoose.model('cbDk', cbDkSchema)

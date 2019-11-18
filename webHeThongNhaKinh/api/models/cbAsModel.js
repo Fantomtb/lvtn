@@ -6,6 +6,7 @@ var cbAsSchema = new Schema({
     chiSo: String,
     day: String,
     time: String,
+    viTri:String,
 })
 
 var cbAs = mongoose.model('cbAs', cbAsSchema)

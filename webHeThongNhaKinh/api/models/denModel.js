@@ -2,13 +2,13 @@ var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema;
 
-var cbNdSchema = new Schema({
-    chiSo: String,
+var denSchema = new Schema({
+    state: String,
     day: String,
     time: String,
     viTri:String,
 })
 
-var cbNd = mongoose.model('cbNd', cbNdSchema)
+var den = mongoose.model('den', denSchema)
 
-module.exports = cbNd
+module.exports = den
