@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser')
 var session = require('express-session')
 //#endregion Library
 var app = express()
-var port = process.env.PORT || 4000
+var port = process.env.PORT || 3000
 var server = app.listen(port)
 // require socket.io and connect to server
 var io = require('socket.io')(server)
