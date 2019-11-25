@@ -27,6 +27,11 @@ clientServer.on('connect', function () {
     clientServer.subscribe('denT')
     clientServer.subscribe('mayBomT')
     clientServer.subscribe('quatT')
+    clientServer.subscribe('quatT2')
+    clientServer.subscribe('denT1')
+    clientServer.subscribe('denT2')
+    clientServer.subscribe('mayBomT1')
+    clientServer.subscribe('mayBomT2')
 })
 
 clientServer.on('message', function (topic, data) {
@@ -40,11 +45,23 @@ clientServer.on('message', function (topic, data) {
     if (topic == 'mayBomT') {
         clientSTM.publish('mayBomT', data)
     }
-    if (topic == 'denT') {
-        clientSTM.publish('denT', data)
+    if (topic == 'denT1') {
+        clientSTM.publish('denT1', data)
+    }
+    if (topic == 'denT2') {
+        clientSTM.publish('denT2',data)
     }
     if (topic == 'quatT') {
         clientSTM.publish('quatT', data)
+    }
+    if (topic == 'quatT2') {
+        clientSTM.publish('quatT2', data)
+    }
+    if (topic == 'mayBomT1') {
+        clientSTM.publish('mayBomT1',data)
+    }
+    if (topic == 'mayBomT2') {
+        clientSTM.publish('mayBomT2',data)
     }
 })
 
@@ -54,9 +71,12 @@ clientSTM.on('connect', function () {
     clientSTM.subscribe('nhietDoH')
     clientSTM.subscribe('doDatH')
     clientSTM.subscribe('anhSangH')
-    clientSTM.subscribe('mayBomH')
-    clientSTM.subscribe('denH')
+    clientSTM.subscribe('mayBomH1')
+    clientSTM.subscribe('mayBomH2')
+    clientSTM.subscribe('denH1')
+    clientSTM.subscribe('denH2')
     clientSTM.subscribe('quatH')
+    clientSTM.subscribe('quatH2')
 })
 
 clientSTM.on('message', function (topic, data) {
@@ -69,13 +89,22 @@ clientSTM.on('message', function (topic, data) {
     if (topic == 'anhSangH') {
         clientServer.publish('anhSangH', data)
     }
-    if (topic == 'mayBomH') {
-        clientServer.publish('mayBomH', data)
+    if (topic == 'mayBomH1') {
+        clientServer.publish('mayBomH1', data)
     }
-    if (topic == 'denH') {
-        clientServer.publish('denH', data)
+    if (topic == 'mayBomH2') {
+        clientServer.publish('mayBomH2', data)
+    }
+    if (topic == 'denH1') {
+        clientServer.publish('denH1', data)
+    }
+    if (topic == 'denH2') {
+        clientServer.publish('denH2', data)
     }
     if (topic == 'quatH') {
         clientServer.publish('quatH', data)
+    }
+    if (topic == 'quatH2') {
+        clientServer.publish('quatH2', data)
     }
 })

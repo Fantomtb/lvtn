@@ -20,14 +20,23 @@ module.exports = function (io, client) {
         socket.on('anhSangVS', function (data) {
             client.publish('anhSangT', data, { qos: 2 })
         })
-        socket.on('denVS', function (data) {
-            client.publish('denT', data, { qos: 2 })
+        socket.on('denVS1', function (data) {
+            client.publish('denT1', data, { qos: 2 })
         })
-        socket.on('mayBomVS', function (data) {
-            client.publish('mayBomT', data, { qos: 2 })
+        socket.on('denVS2', function (data) {
+            client.publish('denT2', data, { qos: 2 })
+        })
+        socket.on('mayBomVS1', function (data) {
+            client.publish('mayBomT1', data, { qos: 2 })
+        })
+        socket.on('mayBomVS2', function (data) {
+            client.publish('mayBomT2', data, { qos: 2 })
         })
         socket.on('quatVS', function (data) {
             client.publish('quatT', data, { qos: 2 })
+        })
+        socket.on('quatVS2', function (data) {
+            client.publish('quatT2', data, { qos: 2 })
         })
     })
     //#endregion listen from Client to Server and publish from Server to PLC
@@ -39,9 +48,12 @@ module.exports = function (io, client) {
         client.subscribe('doDatH')
         client.subscribe('anhSangH')
         client.subscribe('doKhiH')
-        client.subscribe('denH')
-        client.subscribe('mayBomH')
+        client.subscribe('denH1')
+        client.subscribe('denH2')
+        client.subscribe('mayBomH1')
+        client.subscribe('mayBomH2')
         client.subscribe('quatH')
+        client.subscribe('quatH2')
 
         // listen all message of all topic
         client.on('message', function (topic, dataClient) {
@@ -61,6 +73,11 @@ module.exports = function (io, client) {
                 cbDdController(dataSocket)
                 io.emit('quatSV', dataSocket)
             }
+            if (topic == 'quatH2') {
+                var dataSocket = dataClient.toString()
+                cbDdController(dataSocket)
+                io.emit('quatSV2', dataSocket)
+            }
             if (topic == 'anhSangH') {
                 var dataSocket = dataClient.toString()
                 cbAsController(dataSocket)
@@ -72,15 +89,25 @@ module.exports = function (io, client) {
                 cbDkController(dataSocket)
                 io.emit('doKhiSV', dataSocket)
             }
-            if (topic == 'denH') {
+            if (topic == 'denH1') {
                 var dataSocket = dataClient.toString()
                 denController(dataSocket)
-                io.emit('denSV', dataSocket)
+                io.emit('denSV1', dataSocket)
             }
-            if (topic == 'mayBomH') {
+            if (topic == 'denH2') {
+                var dataSocket = dataClient.toString()
+                denController(dataSocket)
+                io.emit('denSV2', dataSocket)
+            }
+            if (topic == 'mayBomH1') {
                 var dataSocket = dataClient.toString()
                 mayBomController(dataSocket)
-                io.emit('mayBomSV', dataSocket)
+                io.emit('mayBomSV1', dataSocket)
+            }
+            if (topic == 'mayBomH2') {
+                var dataSocket = dataClient.toString()
+                mayBomController(dataSocket)
+                io.emit('mayBomSV2', dataSocket)
             }
         })
     })
