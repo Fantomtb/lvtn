@@ -60,8 +60,10 @@ socket.on('nhietDoSV', function (data) {
     $('#nhietDo').text(data)
     if (parseFloat(data) > 30) {
         $('#nhietDo').css('color', 'red')
+    } else if (parseFloat(data) <= 30 && parseFloat(data) > 20) {
+        $('#nhietDo').css('color', 'green')
     } else {
-        $('#nhietDo').css('color', 'black')
+        $('#nhietDo').css('color', 'yellow')
     }
 })
 socket.on('doDatSV', function (data) {
