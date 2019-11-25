@@ -1,4 +1,11 @@
 var cbAsController = require('../controllers/cbAsController')
+var cbDdController = require('../controllers/cbDdController')
+var cbDkController = require('../controllers/cbDkController')
+var cbNdController = require('../controllers/cbNdController')
+var denController = require('../controllers/denController')
+var mayBomController = require('../controllers/mayBomController')
+var quatController = require('../controllers/quatController')
+
 
 module.exports = function (io, client) {
 
@@ -13,10 +20,15 @@ module.exports = function (io, client) {
         socket.on('anhSangVS', function (data) {
             client.publish('anhSangT', data, { qos: 2 })
         })
-        socket.on('phVS', function (data) {
-            client.publish('phT', data, { qos: 2 })
+        socket.on('denVS', function (data) {
+            client.publish('denT', data, { qos: 2 })
         })
-
+        socket.on('mayBomVS', function (data) {
+            client.publish('mayBomT', data, { qos: 2 })
+        })
+        socket.on('quatVS', function (data) {
+            client.publish('quatT', data, { qos: 2 })
+        })
     })
     //#endregion listen from Client to Server and publish from Server to PLC
 
@@ -24,30 +36,51 @@ module.exports = function (io, client) {
     client.on('connect', function () {
         console.log('|-----|||||====== MQTT CONNECTED ====== |||||-----|')
         client.subscribe('nhietDoH')
-        client.subscribe('doAmH')
+        client.subscribe('doDatH')
         client.subscribe('anhSangH')
-        client.subscribe('phH')
+        client.subscribe('doKhiH')
+        client.subscribe('denH')
+        client.subscribe('mayBomH')
+        client.subscribe('quatH')
 
         // listen all message of all topic
         client.on('message', function (topic, dataClient) {
             if (topic == 'nhietDoH') {
                 var dataSocket = dataClient.toString()
-                cbAsController(dataSocket)
+                cbNdController(dataSocket)
                 // console.log(dataSocket)
                 io.emit('nhietDoSV', dataSocket)
             }
-            if (topic == 'doAmH') {
+            if (topic == 'doDatH') {
                 var dataSocket = dataClient.toString()
-                io.emit('doAmSV', dataSocket)
+                cbDdController(dataSocket)
+                io.emit('doDatSV', dataSocket)
+            }
+            if (topic == 'quatH') {
+                var dataSocket = dataClient.toString()
+                cbDdController(dataSocket)
+                io.emit('quatSV', dataSocket)
             }
             if (topic == 'anhSangH') {
                 var dataSocket = dataClient.toString()
+                cbAsController(dataSocket)
                 console.log(dataSocket)
                 io.emit('anhSangSV', dataSocket)
             }
-            if (topic == 'phH') {
+            if (topic == 'doKhiH') {
                 var dataSocket = dataClient.toString()
-                io.emit('phSV', dataSocket)
+                cbDkController(dataSocket)
+                io.emit('doKhiSV', dataSocket)
+            }
+            if (topic == 'denH') {
+                var dataSocket = dataClient.toString()
+                denController(dataSocket)
+                io.emit('denSV', dataSocket)
+            }
+            if (topic == 'mayBomH') {
+                var dataSocket = dataClient.toString()
+                mayBomController(dataSocket)
+                io.emit('mayBomSV', dataSocket)
             }
         })
     })

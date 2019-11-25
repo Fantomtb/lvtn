@@ -28,7 +28,7 @@ socket.on('nhietDoSV', function (data) {
         $('#nhietDo').css('color', 'black')
     }
 })
-socket.on('doAmSV', function (data) {
+socket.on('doDatSV', function (data) {
     $('#doAm').text(data)
 })
 socket.on('anhSangSV', function (data) {

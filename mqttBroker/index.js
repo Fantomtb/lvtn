@@ -15,27 +15,36 @@ var options = {
 }
 var clientServer = mqtt.connect('mqtt://m14.cloudmqtt.com', options)
 
-var clientSTM = mqtt.connect('mqtt://192.168.43.23')
+var clientSTM = mqtt.connect('mqtt://192.168.1.78')
 
 // server
 clientServer.on('connect', function () {
     console.log('connected to cloud')
     clientServer.subscribe('nhietDoT')
-    clientServer.subscribe('doAmT')
+    clientServer.subscribe('doDatT')
     clientServer.subscribe('anhSangT')
     clientServer.subscribe('phT')
+    clientServer.subscribe('denT')
+    clientServer.subscribe('mayBomT')
+    clientServer.subscribe('quatT')
 })
 
 clientServer.on('message', function (topic, data) {
     if (topic == 'nhietDoT') {
         clientSTM.publish('nhietDoT', data)
     }
-    if (topic == 'doAmT') {
-        clientSTM.publish('doAmT', data)}
+    if (topic == 'doDatT') {
+        clientSTM.publish('doDatT', data)}
     if (topic == 'anhSangT') {
         clientSTM.publish('anhSangT', data)}
-    if (topic == 'phT') {
-        clientSTM.publish('phT', data)
+    if (topic == 'mayBomT') {
+        clientSTM.publish('mayBomT', data)
+    }
+    if (topic == 'denT') {
+        clientSTM.publish('denT', data)
+    }
+    if (topic == 'quatT') {
+        clientSTM.publish('quatT', data)
     }
 })
 
@@ -43,22 +52,30 @@ clientServer.on('message', function (topic, data) {
 clientSTM.on('connect', function () {
     console.log('connected to STM')
     clientSTM.subscribe('nhietDoH')
-    clientSTM.subscribe('doAmH')
+    clientSTM.subscribe('doDatH')
     clientSTM.subscribe('anhSangH')
-    clientSTM.subscribe('phH')
+    clientSTM.subscribe('mayBomH')
+    clientSTM.subscribe('denH')
+    clientSTM.subscribe('quatH')
 })
 
 clientSTM.on('message', function (topic, data) {
     if (topic == 'nhietDoH') {
         clientServer.publish('nhietDoH', data)
     }
-    if (topic == 'doAmH') {
-        clientServer.publish('doAmH', data)
+    if (topic == 'doDatH') {
+        clientServer.publish('doDatH', data)
     }
     if (topic == 'anhSangH') {
         clientServer.publish('anhSangH', data)
     }
-    if (topic == 'phH') {
-        clientServer.publish('phH', data)
+    if (topic == 'mayBomH') {
+        clientServer.publish('mayBomH', data)
+    }
+    if (topic == 'denH') {
+        clientServer.publish('denH', data)
+    }
+    if (topic == 'quatH') {
+        clientServer.publish('quatH', data)
     }
 })
