@@ -1,12 +1,20 @@
 var socket = io()
 
+var canhBaoCao = $('#inputMucND').val()
+
 // code dk xuong server
+// nhiet do
 $('#btnOnNhietDo').click(function () {
     socket.emit('nhietDoVS', '1')
 })
 $('#btnOffNhietDo').click(function () {
     socket.emit('nhietDoVS', '0')
 })
+$('#btnSetMucND').click(function () {
+    canhBaoCao = $('#inputMucND').val()
+})
+
+// anh sang
 $('#btnOnAnhSang').click(function () {
     socket.emit('anhSangVS', '1')
 })
@@ -56,16 +64,26 @@ $('#btnOffMayBom2').click(function(){
     socket.emit('mayBomVS2','0')
 })
 // code nhan data tu server
+$('#imgCanhBao').hide()
+$('#imgOnDinh').hide()
 socket.on('nhietDoSV', function (data) {
     $('#nhietDo').text(data)
-    if (parseFloat(data) > 30) {
+    if (parseFloat(data) > canhBaoCao) {
         $('#nhietDo').css('color', 'red')
-    } else if (parseFloat(data) <= 30 && parseFloat(data) > 20) {
+        $('#imgCanhBao').show()
+        $('#imgOnDinh').hide()
+    } else if (parseFloat(data) <= canhBaoCao) {
         $('#nhietDo').css('color', 'green')
-    } else {
-        $('#nhietDo').css('color', 'yellow')
+        $('#imgCanhBao').hide()
+        $('#imgOnDinh').show()
     }
 })
+
+socket.on('setMucNDSV',function(data){
+    $('#setMucND').text(data)
+
+})
+
 socket.on('doDatSV', function (data) {
     $('#doAm').text(data)
 })

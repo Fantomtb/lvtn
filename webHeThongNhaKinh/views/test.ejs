@@ -4,12 +4,18 @@
 <head>
     <title>TEST</title>
     <%include ./partials/head%>
+    <link rel="stylesheet" href="assets/css/styleTest.css" type="text/css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">LOGO</a>
+        <a class="navbar-brand" href="#">
+            <!--logo-->
+            <img src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/69615365_2459968760900431_7298413028167385088_n.png?_nc_cat=103&_nc_ohc=t3ql0JNA73wAQl9FMuC1txV5knpfK8THFKShc-k9-1i4f2CwLbXa-z_pw&_nc_ht=scontent.fsgn1-1.fna&oh=c5aa9b1ab71e83f4468f3f865ad3f2f2&oe=5E4B6A0D"
+                alt="Logo" style="width: 55px;">
+        </a>
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -40,49 +46,99 @@
 
     <main class="container" style="margin-top: 80px">
         <div class="row">
-            <div class="col-4 border">
-                <div>Nhiet do: <b><span id="nhietDo" class=""></span></b></div>
-                <input class="form-control" type="text">
+            <div class="col-2 border text-center">
+                <div> <b><span class="">Nhiệt độ</span></b></div>
+                <img src="assets/images/imgIconNhietDo.png" alt="icon nhiet do" style="width:55px;"></img>
             </div>
 
-            <div class="col-4 border">
-                <p id="nhietDo">23</p>
+            <div class="col-6 border">
+                <p class="nhietDo"><span id="nhietDo"></span>&deg;C</p>
             </div>
-            <div class="col-4 border">
-                 <p id="nhietDo">ttrạng thái cảnh báo</p>
+            <div class="col-4 border text-center">
+                <div id="deMuc">Trạng thái cảnh báo</div><br>
+                <img id="imgCanhBao" src="https://retohercules.com/images/caution-icon-png-7.png"
+                    style="width:97px"></img>
+                <img id="imgOnDinh"
+                    src="https://icon-library.net/images/check-mark-icon-transparent-background/check-mark-icon-transparent-background-9.jpg"
+                    style="width:97px"></img>
             </div>
         </div>
 
         <div class="row mt-3">
 
-            <div class="col-6 border">
-                <p id="nhietDo">Set muc canh bao</p>
+            <div class="col-4 border text-center">
+                <p id="deMuc">Mức cảnh báo</p>
+                <div class="input-group mb-3">
+                    <input id="inputMucND" class="form-control" type="text" value="40" placeholder="Data">
+                    <div class="input-group-append">
+                        <button id="btnSetMucND" class="btn btn-success" type="submit">Set</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-6 border">
-                <p id="nhietDo">Nut nhan voi cai quat</p>
+            <div class="col-8 border text-center">
+                <i class="fas fa-fan fa-10x mb-2"></i><br>
+                <button id="btnOnNhietDo" class="btn btn-outline-primary mr-2">ON</button>
+                <button id="btnOffNhietDo" class="btn btn-outline-dark ml-2">OFF</button>
             </div>
 
         </div>
         <div class="row">
             <div class="col-12 border">
                 <div class="row">
-                    <div class="col-6 border">
-                        thống kê
+                    <div id="deMuc" class="col-6 border">
+                        Thống kê
                     </div>
-                    <div class="col-6 border">
-                        chinh ngay thang
+                    <div id="deMuc" class="col-6 border">
+                        Chỉnh ngay thang
                     </div>
                 </div>
             </div>
-            <div class="col-6 border">
-                Bieu do
+            <div id="deMuc" class="col-6 border">
+                <p>Biểu đồ</p><br>
+                <canvas id="chLine" width="400" height="400"></canvas>
             </div>
-            <div class="col-6 border">
-                Lich su
+            <div id="deMuc" class="col-6 border">
+                <p>Lịch sử</p>
+
+                <div class="container">
+
+                    <table class="table table-dark table-striped small">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Thời gian</th>
+                                <th>Chỉ số</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>29/11/2019</td>
+                                <td>9:50 AM</td>
+                                <td>28.89</td>
+                                <td>OFF</td>
+                            </tr>
+                            <tr>
+                                <td>29/11/2019</td>
+                                <td>9:50 AM</td>
+                                <td>28.89</td>
+                                <td>OFF</td>
+                            </tr>
+                            <tr>
+                                <td>29/11/2019</td>
+                                <td>9:50 AM</td>
+                                <td>28.89</td>
+                                <td>OFF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
         </div>
-<!--         
+        <!--         
         Nhiet do: <p id="nhietDo"></p>
         <button id="btnOnNhietDo">On nhiet do</button>
         <button id="btnOffNhietDo">Off nhiet do</button>
@@ -120,6 +176,37 @@
 
     <script src="socket.io/socket.io.js"></script>
     <script src="assets/js/controlAllSystems.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+        var chartData = {
+            labels: ["S", "M", "T", "W", "T", "F", "S"],
+            datasets: [{
+                data: [589, 445, 483, 503, 689, 692, 634],
+            },
+            {
+                data: [639, 465, 493, 478, 589, 632, 674],
+            }]
+        };
+        var chLine = document.getElementById("chLine");
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

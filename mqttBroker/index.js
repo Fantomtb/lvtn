@@ -15,7 +15,7 @@ var options = {
 }
 var clientServer = mqtt.connect('mqtt://m14.cloudmqtt.com', options)
 
-var clientSTM = mqtt.connect('mqtt://192.168.1.78')
+var clientSTM = mqtt.connect('mqtt://172.16.3.193')
 
 // server
 clientServer.on('connect', function () {
@@ -32,6 +32,7 @@ clientServer.on('connect', function () {
     clientServer.subscribe('denT2')
     clientServer.subscribe('mayBomT1')
     clientServer.subscribe('mayBomT2')
+    clientServer.subscribe('setMucNDT')
 })
 
 clientServer.on('message', function (topic, data) {
@@ -62,6 +63,9 @@ clientServer.on('message', function (topic, data) {
     }
     if (topic == 'mayBomT2') {
         clientSTM.publish('mayBomT2',data)
+    }
+    if (topic == 'setMucNDT') {
+        clientSTM.publish('setMucND',data)
     }
 })
 
