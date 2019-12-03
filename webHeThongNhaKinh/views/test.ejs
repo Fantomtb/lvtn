@@ -13,7 +13,7 @@
         <!-- Brand -->
         <a class="navbar-brand" href="#">
             <!--logo-->
-            <img src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/69615365_2459968760900431_7298413028167385088_n.png?_nc_cat=103&_nc_ohc=t3ql0JNA73wAQl9FMuC1txV5knpfK8THFKShc-k9-1i4f2CwLbXa-z_pw&_nc_ht=scontent.fsgn1-1.fna&oh=c5aa9b1ab71e83f4468f3f865ad3f2f2&oe=5E4B6A0D"
+            <img src="assets/images/logoBK.png"
                 alt="Logo" style="width: 55px;">
         </a>
 
@@ -96,11 +96,11 @@
             </div>
             <div id="deMuc" class="col-6 border">
                 <p>Biểu đồ</p><br>
-                <canvas id="chLine" width="400" height="400"></canvas>
+                <canvas id="chLine" width="400" height="300"></canvas>
             </div>
             <div id="deMuc" class="col-6 border">
                 <p>Lịch sử</p>
-
+                <br>
                 <div class="container">
 
                     <table class="table table-dark table-striped small">
@@ -179,13 +179,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
         var chartData = {
-            labels: ["S", "M", "T", "W", "T", "F", "S"],
+            labels: ["S","S","S","S","S","S", "M", "T", "W", "T", "F", "S"],
             datasets: [{
-                data: [589, 445, 483, 503, 689, 692, 634],
-            },
-            {
-                data: [639, 465, 493, 478, 589, 632, 674],
-            }]
+                data: [589, 445, 483, 503, 689, 692,2,4,5,5,6,6,6,7,7, 634],
+            }
+            
+                ]
         };
         var chLine = document.getElementById("chLine");
         if (chLine) {
