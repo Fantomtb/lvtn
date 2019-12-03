@@ -15,7 +15,7 @@ var options = {
 }
 var clientServer = mqtt.connect('mqtt://m14.cloudmqtt.com', options)
 
-var clientSTM = mqtt.connect('mqtt://172.16.3.193')
+var clientSTM = mqtt.connect('mqtt://10.128.129.78')
 
 // server
 clientServer.on('connect', function () {
