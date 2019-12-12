@@ -118,5 +118,5 @@ module.exports = function (io, client) {
             }
         })
     })
-    //#endregion subscribe from PLC to Server and emit from Server to Client
+    //#endregion subscribe from STM to Server and emit from Server to Client
 }

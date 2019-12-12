@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Nhiệt độ</title>
+    <%include ../partials/head%>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+</head>
+
+<body>
+    <%include ../partials/header%>
+
+    <div id="wrapper">
+        <%include ../partials/sidebar%>
+        <div id="content-wrapper" class="container-fluid">
+            <!-- Contents -->
+            <div class="row">
+                <div class="col-2 border text-center d-flex justify-content-center align-items-center p-3">
+                    <div>
+                        <p class="pb-1 m-0 font-weight-bold">Nhiệt độ</p>
+                        <img src="assets/images/imgIconNhietDo.png" alt="icon nhiet do" style="width:35px;"></img>
+                    </div>
+                </div>
+
+                <div class="col-6 border-left-0 jus justify-content-center d-flex align-items-center border p-3">
+                    <p class="nhietDo m-0 font-weight-bold"><span id="nhietDo"></span>&deg;C</p>
+                </div>
+                <div
+                    class="col-4 border-top border-bottom border-left-0 border-right text-center d-flex justify-content-center p-3 align-items-center">
+                    <div>
+                        <div id="deMuc" class="font-weight-bold pb-1">Trạng thái cảnh báo</div>
+                        <img id="imgCanhBao" src="assets/images/caution.png" style="width:4em"></img>
+                        <img id="imgOnDinh" src="assets/images/cautionOD.jpg" style="width:4em"></img>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div
+                    class="col-4 d-flex justify-content-center align-items-center border border-bottom-0 text-center p-3">
+                    <div>
+                        <p class="m-0 pb-1 font-weight-bold" id="deMuc">Mức cảnh báo</p>
+                        <div class="input-group mb-3">
+                            <input id="inputMucND" class="form-control" type="text" value="40" placeholder="Data">
+                            <div class="input-group-append">
+                                <button id="btnSetMucND" class="btn btn-success pl-3 pr-3" type="submit">Set</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="col-8 d-flex justify-content-center align-items-center p-3 border border-left-0 border-bottom-0 text-center">
+                    <div>
+                        <i id="iconFan" class="fas fa-fan mb-2" style="font-size: 5em;"></i><br>
+                        <div class="pt-1">
+                            <button id="btnOnNhietDo" class="btn btn-outline-primary text-center"
+                                style="width: 60px;">ON</button>
+                            <button id="btnOffNhietDo" class="btn btn-outline-dark text-center"
+                                style="width: 60px;">OFF</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12 border p-0">
+                    <div class="row">
+                        <div id="deMuc"
+                            class="col-6 font-weight-bold border-right-0 pt-2 pb-2 d-flex align-items-center border-bottom-0">
+                            Thống kê
+                        </div>
+                        <div id="deMuc" class="col-6 font-weight-bold border-left d-flex align-items-center border-bottom-0">
+                            <div class="row">
+                                <label>Chọn ngày từ</label><br>
+                                <input type="text" class="form-control" id="dayFrom" value="2019-"><br>
+                                <label>Đến</label><br>
+                                <input type="text" class="form-control" id="dayTo" value="2019-"><br>
+                                <button class="btn btn-sm btn-primary" id="btnShowDataNhietDo">Hiện</button>
+                                <i id="loadingTableNhietDo" class="fas fa-spinner fa-spin fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="deMuc" class="col-6 border border-right-0 border-top-0">
+                    <p class=" font-weight-bold pt-2 pb-1 m-0">Biểu đồ</p>
+                    <canvas id="chLine" class="pb-2" width="400" height="300"></canvas>
+                </div>
+                <div id="deMuc" class="col-6 border border-top-0">
+                    <p class=" font-weight-bold pt-2 pb-1 m-0">Lịch sử</p>
+                    <div class="container p-0">
+
+                        <table class="table table-dark table-striped small mb-2">
+                            <thead>
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Thời gian</th>
+                                    <th>Chỉ số</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblNhietDo"></tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <%include ../partials/footer%>
+        </div>
+    </div>
+
+    <%include ../partials/script%>
+</body>
+
+</html>

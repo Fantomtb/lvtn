@@ -1,14 +1,13 @@
-var Users = require('../api/models/userModel')
-var StreetLights = require('../api/models/streetlightModel')
+var NhietDos = require('../api/models/cbNdModel')
 
 module.exports = function (app, passport) {
 
-    app.get(['/', '/home'], isLoggedInHome, function (req, res) {
+    app.get(['/', '/home'], function (req, res) {
         res.render('pages/home')
     })
 
-    app.get('/introduction', function (req, res) {
-        res.render('pages/homeFake')
+    app.get('/nhietdo', function (req, res) {
+        res.render('pages/nhietDo')
     })
 
     app.get('/login', function (req, res) {
@@ -32,23 +31,16 @@ module.exports = function (app, passport) {
         res.render('test')
     })
 
-    app.get('/streetlight', isLoggedInStreetLight, function (req, res) {
-
-        res.render('pages/streetLight')
-    })
-
-    app.get('/trafficlamp', isLoggedInTrafficLamp, function (req, res) {
-        res.render('pages/trafficLamp')
-    })
-
-    app.get('/history', isLoggedIn, async function (req, res) {
+    app.get('/nhietdo/lichsu', async function (req, res) {
         var temp_history = [];
-        await StreetLights.find({ streetName: req.query.streetname }, function (err, results) {
+        await NhietDos.find({}, function (err, results) {
             if (err) {
                 throw err
             }
             results.forEach(function (row) {
-                temp_history.push({ 'day': row.day, 'time': row.time, 'state': row.state, 'errorLights': row.errorLights })
+                if(row.day >= req.query.dayFrom && row.day <= req.query.dayTo) {
+                    temp_history.push({ 'day': row.day, 'time': row.time, 'chiSo': row.chiSo })
+                }
             })
             res.status(200).send(temp_history)
         })

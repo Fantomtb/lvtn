@@ -5,9 +5,11 @@ var canhBaoCao = $('#inputMucND').val()
 // code dk xuong server
 // nhiet do
 $('#btnOnNhietDo').click(function () {
+    $('#iconFan').addClass('fa-spin')
     socket.emit('nhietDoVS', '1')
 })
 $('#btnOffNhietDo').click(function () {
+    $('#iconFan').removeClass('fa-spin')
     socket.emit('nhietDoVS', '0')
 })
 $('#btnSetMucND').click(function () {
@@ -111,3 +113,36 @@ socket.on('mayBomSV1', function (data){
 socket.on('mayBomSV2', function (data){
     $('#maybom2').text(data)
 })
+
+// Dùng cho table nhiet do
+$('#loadingTableNhietDo').hide()
+$('#btnShowDataNhietDo').click(function () {
+    $('#tblNhietDo').html('')
+    $.ajax({
+        type: 'GET',
+        url: `/nhietdo/lichsu?dayFrom=${$('#dayFrom').val()}&dayTo=${$('#dayTo').val()}`,
+        beforeSend: function () {
+            $('#loadingTableNhietDo').show()
+        },
+        success: function (data) {
+            var dataSort = data.reverse()
+            dataSort.forEach(row => {
+                $('#tblNhietDo').append(`
+                    <tr>
+                        <th>${row.day}</th>
+                        <th>${row.time}</th>
+                        <th>${row.chiSo}</th>
+                    </tr>
+                `)
+            })
+        },
+        error: function (err) {
+            console.log(err)
+        },
+        complete: function () {
+            $('#loadingTableNhietDo').hide()
+        }
+    })
+})
+
+// dung cho table do am
