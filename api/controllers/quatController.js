@@ -9,10 +9,10 @@ today = yyyy + '-' + mm + '-' + dd
 module.exports = function (data) {
     console.log('quat: ' + data)
     // ex: data = '125.5'
-    var viTri = data[0]
-    var state = data.slice(1)
+    //var viTri = data[0]
+    //var state = data.slice(1)
     var quat = new Quat()
-    quat.viTri = viTri
+    //quat.viTri = viTri
     quat.state = state
     quat.day = today
     quat.time = (new Date()).toLocaleTimeString()

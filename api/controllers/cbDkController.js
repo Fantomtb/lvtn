@@ -8,10 +8,10 @@ today = yyyy + '-' + mm + '-' + dd
 
 module.exports = function (data) {
     // ex: data = '125.5'
-    var viTri = data[0]
-    var chiSo = data.slice(1)
+    //var viTri = data[0]
+    //var chiSo = data.slice(1)
     var cbDk = new CbDk()
-    cbDk.viTri = viTri
+    //cbDk.viTri = viTri
     cbDk.chiSo = chiSo
     cbDk.day = today
     cbDk.time = (new Date()).toLocaleTimeString()

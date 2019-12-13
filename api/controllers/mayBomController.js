@@ -9,10 +9,10 @@ today = yyyy + '-' + mm + '-' + dd
 module.exports = function (data) {
     console.log('mayBom: ' + data)
     // ex: data = '125.5'
-    var viTri = data[0]
-    var state = data.slice(1)
+   // var viTri = data[0]
+    //var state = data.slice(1)
     var mayBom = new MayBom()
-    mayBom.viTri = viTri
+   // mayBom.viTri = viTri
     mayBom.state = state
     mayBom.day = today
     mayBom.time = (new Date()).toLocaleTimeString()

@@ -8,10 +8,10 @@ today = yyyy + '-' + mm + '-' + dd
 
 module.exports = function (data) {
     // ex: data = '125.5'
-    var viTri = data[0]
-    var state = data.slice(1)
+    //var viTri = data[0]
+    //var state = data.slice(1)
     var den = new Den()
-    den.viTri = viTri
+    //den.viTri = viTri
     den.state = state
     den.day = today
     den.time = (new Date()).toLocaleTimeString()
