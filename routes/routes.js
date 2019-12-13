@@ -1,4 +1,5 @@
 var NhietDos = require('../api/models/cbNdModel')
+var AnhSangs = require('../api/models/cbAsModel')
 
 module.exports = function (app, passport) {
 
@@ -8,6 +9,10 @@ module.exports = function (app, passport) {
 
     app.get('/nhietdo', function (req, res) {
         res.render('pages/nhietDo')
+    })
+
+    app.get('/anhsang', function (req, res) {
+        res.render('pages/anhSang')
     })
 
     app.get('/login', function (req, res) {
@@ -33,7 +38,23 @@ module.exports = function (app, passport) {
 
     app.get('/nhietdo/lichsu', async function (req, res) {
         var temp_history = [];
-        await NhietDos.find({}, function (err, results) {
+        console.log('start')
+        await NhietDos.find({ viTri: '1'}, function (err, results) {
+            if (err) {
+                throw err
+            }
+            console.log('end')
+            results.forEach(function (row) {
+                if(row.day >= req.query.dayFrom && row.day <= req.query.dayTo) {
+                    temp_history.push({ 'day': row.day, 'time': row.time, 'chiSo': row.chiSo })
+                }
+            })
+            res.status(200).send(temp_history)
+        })
+    })
+    app.get('/anhsang/lichsu', async function (req, res) {
+        var temp_history = [];
+        await AnhSangs.find({ viTri: '1'}, function (err, results) {
             if (err) {
                 throw err
             }
@@ -46,6 +67,7 @@ module.exports = function (app, passport) {
         })
     })
 }
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
