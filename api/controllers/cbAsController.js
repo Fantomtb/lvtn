@@ -11,8 +11,8 @@ module.exports = function (data) {
     //var viTri = data[0]
     //var chiSo = data.slice(1)
     var cbAs = new CbAs()
-    //cbAs.viTri = viTri
-    cbAs.chiSo = chiSo
+    cbAs.viTri = '1'
+    cbAs.chiSo = data
     cbAs.day = today
     cbAs.time = (new Date()).toLocaleTimeString()
     cbAs.save(function (err) {

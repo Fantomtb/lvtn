@@ -14,9 +14,9 @@ module.exports = function (io, client) {
         socket.on('nhietDoVS', function (data) {
             client.publish('nhietDoT', data, { qos: 2 })
         })
-        socket.on('setMucNDVS',function(data){
+        socket.on('setMucNDVS', function (data) {
             console.log(data)
-            client.publish('setMucNDT',data,{qos:2})
+            client.publish('setMucNDT', data, { qos: 2 })
         })
         socket.on('doAmVS', function (data) {
             client.publish('doAmT', data, { qos: 2 })
@@ -58,7 +58,7 @@ module.exports = function (io, client) {
         client.subscribe('mayBomH2')
         client.subscribe('quatH')
         client.subscribe('quatH2')
-        
+
 
         // listen all message of all topic
         client.on('message', function (topic, dataClient) {
@@ -68,8 +68,8 @@ module.exports = function (io, client) {
                 // console.log(dataSocket)
                 io.emit('nhietDoSV', dataSocket)
             }
-        
-            
+
+
             if (topic == 'doDatH') {
                 var dataSocket = dataClient.toString()
                 cbDdController(dataSocket)

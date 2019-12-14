@@ -12,21 +12,20 @@
 
     <div id="wrapper">
         <%include ../partials/sidebar%>
-        <div id="content-wrapper" class="container-fluid">
+        <div id="content-wrapper" class="container">
             <!-- Contents -->
             <div class="row">
-                <div class="col-2 border text-center d-flex justify-content-center align-items-center p-3">
+                <div class="col-2  text-center d-flex justify-content-center align-items-center p-3">
                     <div>
                         <p class="pb-1 m-0 font-weight-bold">Nhiệt độ</p>
-                        <img src="assets/images/imgIconNhietDo.png" alt="icon nhiet do" style="width:35px;"></img>
+                        <i class="fas fa-fw fa-4x fa-thermometer-quarter"></i>
                     </div>
                 </div>
 
-                <div class="col-6 border-left-0 jus justify-content-center d-flex align-items-center border p-3">
+                <div class="col-6  jus justify-content-center d-flex align-items-center p-3">
                     <p class="nhietDo m-0 font-weight-bold"><span id="nhietDo"></span>&deg;C</p>
                 </div>
-                <div
-                    class="col-4 border-top border-bottom border-left-0 border-right text-center d-flex justify-content-center p-3 align-items-center">
+                <div class="col-4   text-center d-flex justify-content-center p-3 align-items-center">
                     <div>
                         <div id="deMuc" class="font-weight-bold pb-1">Trạng thái cảnh báo</div>
                         <img id="imgCanhBao" src="assets/images/caution.png" style="width:4em"></img>
@@ -36,8 +35,7 @@
             </div>
             <br>
             <div class="row ">
-                <div
-                    class="col-4 d-flex justify-content-center align-items-center border border-bottom-0 text-center p-3">
+                <div class="col-4 d-flex justify-content-center align-items-center  text-center p-3">
                     <div>
                         <p class="m-0 pb-1 font-weight-bold" id="deMuc">Mức cảnh báo</p>
                         <div class="input-group mb-3">
@@ -49,8 +47,7 @@
                     </div>
                 </div>
 
-                <div
-                    class="col-8 d-flex justify-content-center align-items-center p-3 border border-left-0 border-bottom-0 text-center">
+                <div class="col-8 d-flex justify-content-center align-items-center p-3  text-center">
                     <div>
                         <i id="iconFan" class="fas fa-fan mb-2" style="font-size: 5em;"></i><br>
                         <div class="pt-1">
@@ -64,31 +61,41 @@
 
             </div>
             <div class="row">
-                <div class="col-12 border p-0">
+                <div class="col-12">
                     <div class="row">
-                        <div id="deMuc"
-                            class="col-6 font-weight-bold border-right-0 pt-2 pb-2 d-flex align-items-center border-bottom-0">
-                            Thống kê
+                        <div id="deMuc" class="col-3 font-weight-bold ">
+                            <div class="form-group w-100 text-center">
+                                <label class="">Chọn ngày từ</label>
+                                <input type="text" class="form-control" id="dayFrom" value="2019-">
+                            </div>
                         </div>
-                        <div id="deMuc" class="col-6 font-weight-bold border-left d-flex align-items-center border-bottom-0">
-                            <div class="row">
-                                <label>Chọn ngày từ</label><br>
-                                <input type="text" class="form-control" id="dayFrom" value="2019-"><br>
-                                <label>Đến</label><br>
-                                <input type="text" class="form-control" id="dayTo" value="2019-"><br>
+                        <div id="deMuc" class="col-3  font-weight-bold ">
+                            <div class="form-group w-100 text-center">
+                                <label>Đến</label>
+                                <input type="text" class="form-control" id="dayTo" value="2019-">
+                            </div>
+                        </div>
+                        <div class="col-3 text-center" style="align-self: flex-end;">
+                            <div class="form-group">
                                 <button class="btn btn-sm btn-primary" id="btnShowDataNhietDo">Hiện</button>
-                                <i id="loadingTableNhietDo" class="fas fa-spinner fa-spin fa-2x"></i>
+                                <i id="loadingTableNhietDo" class="fas fa-spinner fa-fw fa-spin fa-2x"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="deMuc" class="col-6 border border-right-0 border-top-0">
-                    <p class=" font-weight-bold pt-2 pb-1 m-0">Biểu đồ</p>
-                    <canvas id="chLine" class="pb-2" width="400" height="300"></canvas>
+                <div id="deMuc" class="col-6 ">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area"></i>
+                            Biểu đồ</div>
+                        <div class="card-body">
+                            <canvas id="chartNhietDo" width="100%" height="30"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <div id="deMuc" class="col-6 border border-top-0">
-                    <p class=" font-weight-bold pt-2 pb-1 m-0">Lịch sử</p>
-                    <div class="container p-0">
+                <div id="deMuc" class="col-6 text-center">
+                    <p class=" font-weight-bold m-0">Lịch sử</p>
+                    <div class="container">
 
                         <table class="table table-dark table-striped small mb-2">
                             <thead>
