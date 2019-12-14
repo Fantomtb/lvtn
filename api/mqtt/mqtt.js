@@ -18,6 +18,18 @@ module.exports = function (io, client) {
             console.log(data)
             client.publish('setMucNDT', data, { qos: 2 })
         })
+        socket.on('setMucDDVS', function (data) {
+            console.log(data)
+            client.publish('setMucDDT', data, { qos: 2 })
+        })
+        socket.on('setMucDKVS', function (data) {
+            console.log(data)
+            client.publish('setMucDKT', data, { qos: 2 })
+        })
+        socket.on('setMucASVS', function (data) {
+            console.log(data)
+            client.publish('setMucAST', data, { qos: 2 })
+        })
         socket.on('doAmVS', function (data) {
             client.publish('doAmT', data, { qos: 2 })
         })

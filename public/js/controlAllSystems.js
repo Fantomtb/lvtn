@@ -1,7 +1,9 @@
 var socket = io()
 
-var canhBaoCao = $('#inputMucND').val()
-
+var canhBaoCaoND = $('#inputMucND').val()
+var canhBaoCaoDD = $('#inputMucDD').val()
+var canhBaoCaoAS = $('#inputMucAS').val()
+var canhBaoCaoDK = $('#inputMucDK').val()
 // code dk xuong server
 // nhiet do
 $('#btnOnNhietDo').click(function () {
@@ -70,11 +72,11 @@ $('#imgCanhBao').hide()
 $('#imgOnDinh').hide()
 socket.on('nhietDoSV', function (data) {
     $('#nhietDo').text(data)
-    if (parseFloat(data) > canhBaoCao) {
+    if (parseFloat(data) > canhBaoCaoND) {
         $('#nhietDo').css('color', 'red')
         $('#imgCanhBao').show()
         $('#imgOnDinh').hide()
-    } else if (parseFloat(data) <= canhBaoCao) {
+    } else if (parseFloat(data) <= canhBaoCaoND) {
         $('#nhietDo').css('color', 'green')
         $('#imgCanhBao').hide()
         $('#imgOnDinh').show()
@@ -87,23 +89,60 @@ socket.on('setMucNDSV', function (data) {
 })
 
 socket.on('doDatSV', function (data) {
-    $('#doAm').text(data)
+    $('#doDat').text(data)
+    if (parseFloat(data) > canhBaoCaoDD) {
+        $('#doDat').css('color', 'red')
+        $('#imgCanhBao').show()
+        $('#imgOnDinh').hide()
+    } else if (parseFloat(data) <= canhBaoCaoDD) {
+        $('#doDat').css('color', 'green')
+        $('#imgCanhBao').hide()
+        $('#imgOnDinh').show()
+    }
 })
+
+socket.on('setMucDDSV', function (data) {
+    $('#setMucDD').text(data)
+
+})
+
 socket.on('anhSangSV', function (data) {
     $('#anhSang').text(data)
-    if (parseFloat(data) > canhBaoCao) {
+    if (parseFloat(data) > canhBaoCaoAS) {
         $('#anhSang').css('color', 'red')
         $('#imgCanhBao').show()
         $('#imgOnDinh').hide()
-    } else if (parseFloat(data) <= canhBaoCao) {
+    } else if (parseFloat(data) <= canhBaoCaoAS) {
         $('#anhSang').css('color', 'green')
         $('#imgCanhBao').hide()
         $('#imgOnDinh').show()
     }
 })
-socket.on('phSV', function (data) {
-    $('#ph').text(data)
+
+socket.on('setMucASSV', function (data) {
+    $('#setMucAS').text(data)
+
 })
+socket.on('doKhiSV', function (data) {
+    $('#doKhi').text(data)
+    if (parseFloat(data) > canhBaoCaoDK) {
+        $('#doKhi').css('color', 'red')
+        $('#imgCanhBao').show()
+        $('#imgOnDinh').hide()
+    } else if (parseFloat(data) <= canhBaoCaoDK) {
+        $('#doKhi').css('color', 'green')
+        $('#imgCanhBao').hide()
+        $('#imgOnDinh').show()
+    }
+})
+
+socket.on('setMucDKSV', function (data) {
+    $('#setMucDK').text(data)
+
+})
+
+
+
 socket.on('quatSV', function (data) {
     $('#quat').text(data)
 })
@@ -292,4 +331,4 @@ $('#btnShowDataAnhSang').click(function () {
     })
 })
 
-// dung cho table do am
+// dung cho table do dat

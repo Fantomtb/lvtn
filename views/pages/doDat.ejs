@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Độ ẩm đất</title>
+    <%include ../partials/head%>
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+</head>
+
+<body>
+    <%include ../partials/header%>
+
+    <div id="wrapper">
+        <%include ../partials/sidebar%>
+        <div id="content-wrapper" class="container">
+            <!-- Contents -->
+            <div class="row">
+                <div class="col-2  text-center d-flex justify-content-center align-items-center p-3">
+                    <div>
+                        <p class="pb-1 m-0 font-weight-bold">Độ ẩm đất</p>
+                        <i class="fas fa-fw fa-4x fa-tint"></i>
+                    </div>
+                </div>
+
+                <div class="col-6  jus justify-content-center d-flex align-items-center p-3">
+                    <p class="nhietDo m-0 font-weight-bold"><span id="doDat"></span>&#37;</p>
+                </div>
+                <div class="col-4   text-center d-flex justify-content-center p-3 align-items-center">
+                    <div>
+                        <div id="deMuc" class="font-weight-bold pb-1">Trạng thái cảnh báo</div>
+                        <img id="imgCanhBao" src="assets/images/caution.png" style="width:4em"></img>
+                        <img id="imgOnDinh" src="assets/images/cautionOD.jpg" style="width:4em"></img>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row ">
+                <div class="col-4 d-flex justify-content-center align-items-center  text-center p-3">
+                    <div>
+                        <p class="m-0 pb-1 font-weight-bold" id="deMuc">Mức cảnh báo</p>
+                        <div class="input-group mb-3">
+                            <input id="inputMucDD" class="form-control" type="text" value="40" placeholder="Data">
+                            <div class="input-group-append">
+                                <button id="btnSetMucDD" class="btn btn-success pl-3 pr-3" type="submit">Set</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-8 d-flex justify-content-center align-items-center p-3  text-center">
+                    <div>
+                        <i id="iconFan" class="fas fa-fan mb-2" style="font-size: 5em;"></i><br>
+                        <div class="pt-1">
+                            <button id="btnOnDoDat" class="btn btn-outline-primary text-center"
+                                style="width: 60px;">ON</button>
+                            <button id="btnOffDoDat" class="btn btn-outline-dark text-center"
+                                style="width: 60px;">OFF</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div id="deMuc" class="col-3 font-weight-bold ">
+                            <div class="form-group w-100 text-center">
+                                <label class="">Chọn ngày từ</label>
+                                <input type="text" class="form-control" id="dayFrom" value="2019-">
+                            </div>
+                        </div>
+                        <div id="deMuc" class="col-3  font-weight-bold ">
+                            <div class="form-group w-100 text-center">
+                                <label>Đến</label>
+                                <input type="text" class="form-control" id="dayTo" value="2019-">
+                            </div>
+                        </div>
+                        <div class="col-3 text-center" style="align-self: flex-end;">
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-primary" id="btnShowDataDoDat">Hiện</button>
+                                <i id="loadingTableDoDat" class="fas fa-spinner fa-fw fa-spin fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="deMuc" class="col-6 ">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area"></i>
+                            Biểu đồ</div>
+                        <div class="card-body">
+                            <canvas id="chartDoDat" width="100%" height="30"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div id="deMuc" class="col-6 text-center">
+                    <p class=" font-weight-bold m-0">Lịch sử</p>
+                    <div class="container">
+
+                        <table class="table table-dark table-striped small mb-2">
+                            <thead>
+                                <tr>
+                                    <th>Ngày</th>
+                                    <th>Thời gian</th>
+                                    <th>Chỉ số</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblDoDat"></tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <%include ../partials/footer%>
+        </div>
+    </div>
+
+    <%include ../partials/script%>
+</body>
+
+</html>
