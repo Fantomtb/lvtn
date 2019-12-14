@@ -15,7 +15,7 @@ $('#btnOffNhietDo').click(function () {
     socket.emit('nhietDoVS', '0')
 })
 $('#btnSetMucND').click(function () {
-    canhBaoCao = $('#inputMucND').val()
+    canhBaoCaoND = $('#inputMucND').val()
 })
 
 // anh sang
@@ -25,6 +25,11 @@ $('#btnOnAnhSang').click(function () {
 $('#btnOffAnhSang').click(function () {
     socket.emit('anhSangVS', '0')
 })
+$('#btnSetMucAS').click(function(){
+    canhBaoCaoAS = $('#inputMucAS').val()
+})
+
+// do am dat
 $('#btnOnDoAm').click(function () {
     socket.emit('doAmVS', '1')
 })
@@ -332,3 +337,170 @@ $('#btnShowDataAnhSang').click(function () {
 })
 
 // dung cho table do dat
+$('#loadingTableDoDat').hide()
+$('#btnShowDataDoDat').click(function () {
+    $('#tblDoDat').html('')
+    $.ajax({
+        type: 'GET',
+        url: `/dodat/lichsu?dayFrom=${$('#dayFrom').val()}&dayTo=${$('#dayTo').val()}`,
+        beforeSend: function () {
+            $('#loadingTableDoDat').show()
+        },
+        success: function (data) {
+            var dataSort = data.reverse()
+            var dataChart = []
+            var labelsChart = []
+            dataSort.forEach(row => {
+                $('#tblDoDat').append(`
+                    <tr>
+                        <th>${row.day}</th>
+                        <th>${row.time}</th>
+                        <th>${row.chiSo}</th>
+                    </tr>
+                `)
+                dataChart.push(row.chiSo)
+                labelsChart.push(row.time)
+            })
+
+            var myLineChart = new Chart($('#chartDoDat'), {
+                type: 'line',
+                data: {
+                    labels: labelsChart,
+                    datasets: [{
+                        label: "Sessions",
+                        lineTension: 0.3,
+                        backgroundColor: "rgba(2,117,216,0.2)",
+                        borderColor: "rgba(2,117,216,1)",
+                        pointRadius: 5,
+                        pointBackgroundColor: "rgba(2,117,216,1)",
+                        pointBorderColor: "rgba(255,255,255,0.8)",
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                        pointHitRadius: 50,
+                        pointBorderWidth: 2,
+                        data: dataChart,
+                    }],
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            time: {
+                                unit: 'date'
+                            },
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: {
+                                maxTicksLimit: 7
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                min: 0,
+                                max: 300,
+                                maxTicksLimit: 5
+                            },
+                            gridLines: {
+                                color: "rgba(0, 0, 0, .125)",
+                            }
+                        }],
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            })
+        },
+        error: function (err) {
+            console.log(err)
+            alert('FAIL')
+        },
+        complete: function () {
+            $('#loadingTableDoDat').hide()
+        }
+    })
+})
+// dung cho table do khi
+$('#loadingTableDoKhi').hide()
+$('#btnShowDataDoKhi').click(function () {
+    $('#tblDoKhi').html('')
+    $.ajax({
+        type: 'GET',
+        url: `/dokhi/lichsu?dayFrom=${$('#dayFrom').val()}&dayTo=${$('#dayTo').val()}`,
+        beforeSend: function () {
+            $('#loadingTableDoKhi').show()
+        },
+        success: function (data) {
+            var dataSort = data.reverse()
+            var dataChart = []
+            var labelsChart = []
+            dataSort.forEach(row => {
+                $('#tblDoKhi').append(`
+                    <tr>
+                        <th>${row.day}</th>
+                        <th>${row.time}</th>
+                        <th>${row.chiSo}</th>
+                    </tr>
+                `)
+                dataChart.push(row.chiSo)
+                labelsChart.push(row.time)
+            })
+
+            var myLineChart = new Chart($('#chartDoKhi'), {
+                type: 'line',
+                data: {
+                    labels: labelsChart,
+                    datasets: [{
+                        label: "Sessions",
+                        lineTension: 0.3,
+                        backgroundColor: "rgba(2,117,216,0.2)",
+                        borderColor: "rgba(2,117,216,1)",
+                        pointRadius: 5,
+                        pointBackgroundColor: "rgba(2,117,216,1)",
+                        pointBorderColor: "rgba(255,255,255,0.8)",
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                        pointHitRadius: 50,
+                        pointBorderWidth: 2,
+                        data: dataChart,
+                    }],
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            time: {
+                                unit: 'date'
+                            },
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: {
+                                maxTicksLimit: 7
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                min: 0,
+                                max: 300,
+                                maxTicksLimit: 5
+                            },
+                            gridLines: {
+                                color: "rgba(0, 0, 0, .125)",
+                            }
+                        }],
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            })
+        },
+        error: function (err) {
+            console.log(err)
+            alert('FAIL')
+        },
+        complete: function () {
+            $('#loadingTableDoKhi').hide()
+        }
+    })
+})
