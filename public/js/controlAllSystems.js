@@ -30,12 +30,27 @@ $('#btnSetMucAS').click(function(){
 })
 
 // do am dat
-$('#btnOnDoAm').click(function () {
+$('#btnOnDoDat').click(function () {
     socket.emit('doAmVS', '1')
 })
-$('#btnOffDoAm').click(function () {
-    socket.emit('doAmVS', '0')
+$('#btnOffDoDat').click(function () {
+    socket.emit('doDatVS', '0')
 })
+$('#btnSetMucDD').click(function(){
+    canhBaoCaoDD = $('#inputMucDD').val()
+})
+
+// do am khong khi
+$('#btnOnDoKhi').click(function(){
+    socket.emit('doKhiVS','1')
+})
+$('#btnOffDoKhi').click(function(){
+    socket.emit('doKhiVS','1')
+})
+$('btnSetMucDK').click(function(){
+    canhBaoCaoDK = $('#inputMucDK').val()
+})
+
 $('#btnOnQuat').click(function () {
     socket.emit('quatVS', '1')
 })
