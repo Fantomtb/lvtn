@@ -30,8 +30,11 @@ module.exports = function (io, client) {
             console.log(data)
             client.publish('setMucAST', data, { qos: 2 })
         })
-        socket.on('doAmVS', function (data) {
-            client.publish('doAmT', data, { qos: 2 })
+        socket.on('doDatVS', function (data) {
+            client.publish('doDatT', data, { qos: 2 })
+        })
+        socket.on('doKhiVS', function (data) {
+            client.publish('doKhiT', data, { qos: 2 })
         })
         socket.on('anhSangVS', function (data) {
             client.publish('anhSangT', data, { qos: 2 })
