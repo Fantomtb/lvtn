@@ -19,7 +19,7 @@ module.exports = function (app, passport) {
     app.get('/dodat', function (req, res) {
         res.render('pages/doDat')
     })
-    
+
     app.get('/dokhi', function (req, res) {
         res.render('pages/doKhi')
     })

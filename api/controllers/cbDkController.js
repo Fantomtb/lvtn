@@ -12,7 +12,7 @@ module.exports = function (data) {
     //var chiSo = data.slice(1)
     var cbDk = new CbDk()
     cbDk.viTri = '1'
-    cbDk.chiSo = chiSo
+    cbDk.chiSo = data
     cbDk.day = today
     cbDk.time = (new Date()).toLocaleTimeString()
     cbDk.save(function (err) {
