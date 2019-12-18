@@ -90,11 +90,14 @@ module.exports = function (io, client) {
                 cbDdController(dataSocket)
                 io.emit('doDatSV', dataSocket)
             }
+
+
             if (topic == 'quatH') {
                 var dataSocket = dataClient.toString()
                 cbDdController(dataSocket)
                 io.emit('quatSV', dataSocket)
             }
+
             if (topic == 'quatH2') {
                 var dataSocket = dataClient.toString()
                 cbDdController(dataSocket)

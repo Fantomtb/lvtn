@@ -20,10 +20,10 @@ $('#btnSetMucND').click(function () {
 
 // anh sang
 $('#btnOnAnhSang').click(function () {
-    socket.emit('anhSangVS', '1')
+    socket.emit('anhSangVS', '3')
 })
 $('#btnOffAnhSang').click(function () {
-    socket.emit('anhSangVS', '0')
+    socket.emit('anhSangVS', '2')
 })
 $('#btnSetMucAS').click(function(){
     canhBaoCaoAS = $('#inputMucAS').val()
@@ -31,10 +31,10 @@ $('#btnSetMucAS').click(function(){
 
 // do am dat
 $('#btnOnDoDat').click(function () {
-    socket.emit('doAmVS', '1')
+    socket.emit('doDatVS', '5')
 })
 $('#btnOffDoDat').click(function () {
-    socket.emit('doDatVS', '0')
+    socket.emit('doDatVS', '4')
 })
 $('#btnSetMucDD').click(function(){
     canhBaoCaoDD = $('#inputMucDD').val()
@@ -42,10 +42,10 @@ $('#btnSetMucDD').click(function(){
 
 // do am khong khi
 $('#btnOnDoKhi').click(function(){
-    socket.emit('doKhiVS','1')
+    socket.emit('doKhiVS','7')
 })
 $('#btnOffDoKhi').click(function(){
-    socket.emit('doKhiVS','1')
+    socket.emit('doKhiVS','6')
 })
 $('btnSetMucDK').click(function(){
     canhBaoCaoDK = $('#inputMucDK').val()
@@ -92,6 +92,8 @@ $('#imgCanhBao').hide()
 $('#imgOnDinh').hide()
 socket.on('nhietDoSV', function (data) {
     $('#nhietDo').text(data)
+    var b = 10
+    parseFloat(data)/= b
     if (parseFloat(data) > canhBaoCaoND) {
         $('#nhietDo').css('color', 'red')
         $('#imgCanhBao').show()
