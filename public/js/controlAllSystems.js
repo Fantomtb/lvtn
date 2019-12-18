@@ -92,8 +92,6 @@ $('#imgCanhBao').hide()
 $('#imgOnDinh').hide()
 socket.on('nhietDoSV', function (data) {
     $('#nhietDo').text(data)
-    var b = 10
-    parseFloat(data)/= b
     if (parseFloat(data) > canhBaoCaoND) {
         $('#nhietDo').css('color', 'red')
         $('#imgCanhBao').show()
