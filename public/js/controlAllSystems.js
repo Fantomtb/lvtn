@@ -48,7 +48,7 @@ $('#btnOnDoKhi').click(function(){
 $('#btnOffDoKhi').click(function(){
     socket.emit('doKhiVS','6')
 })
-$('btnSetMucDK').click(function(){
+$('#btnSetMucDK').click(function(){
     canhBaoCaoDK = $('#inputMucDK').val()
 })
 
@@ -92,12 +92,12 @@ $('#btnOffMayBom2').click(function () {
 $('#imgCanhBao').hide()
 $('#imgOnDinh').hide()
 socket.on('nhietDoSV', function (data) {
-    $('#nhietDo').text(data)
-    if (parseFloat(data) > canhBaoCaoND) {
+    $('#nhietDo').text(`${data.slice(0, 2)}.${data.slice(2)}`)
+    if (parseFloat(data) / 10 > canhBaoCaoND) {
         $('#nhietDo').css('color', 'red')
         $('#imgCanhBao').show()
         $('#imgOnDinh').hide()
-    } else if (parseFloat(data) <= canhBaoCaoND) {
+    } else if (parseFloat(data) / 10 <= canhBaoCaoND) {
         $('#nhietDo').css('color', 'green')
         $('#imgCanhBao').hide()
         $('#imgOnDinh').show()
@@ -145,12 +145,12 @@ socket.on('setMucASSV', function (data) {
 
 })
 socket.on('doKhiSV', function (data) {
-    $('#doKhi').text(data)
-    if (parseFloat(data) > canhBaoCaoDK) {
+    $('#doKhi').text(`${data.slice(0, 2)}.${data.slice(2)}`)
+    if (parseFloat(data)/10 > canhBaoCaoDK) {
         $('#doKhi').css('color', 'red')
         $('#imgCanhBao').show()
         $('#imgOnDinh').hide()
-    } else if (parseFloat(data) <= canhBaoCaoDK) {
+    } else if (parseFloat(data)/10 <= canhBaoCaoDK) {
         $('#doKhi').css('color', 'green')
         $('#imgCanhBao').hide()
         $('#imgOnDinh').show()
