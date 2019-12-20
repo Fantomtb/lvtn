@@ -5,8 +5,9 @@ var cbNdController = require('../controllers/cbNdController')
 var denController = require('../controllers/denController')
 var mayBomController = require('../controllers/mayBomController')
 var quatController = require('../controllers/quatController')
+var nodemailer = require('nodemailer')
 
-
+var mucNhietDo = 0
 module.exports = function (io, client) {
 
     //#region Listen from View to Server and publish from Server to STM
@@ -16,6 +17,7 @@ module.exports = function (io, client) {
         })
         socket.on('setMucNDVS', function (data) {
             console.log(data)
+            mucNhietDo = parseFloat(data)
             client.publish('setMucNDT', data, { qos: 2 })
         })
         socket.on('setMucDDVS', function (data) {
@@ -80,6 +82,9 @@ module.exports = function (io, client) {
             if (topic == 'nhietDoH') {
                 var dataSocket = dataClient.toString()
                 cbNdController(dataSocket)
+                if (parseFloat(dataSocket) >= mucNhietDo && mucNhietDo > 0) {
+                    sendEmail('Nhiệt độ', dataSocket)
+                }
                 // console.log(dataSocket)
                 io.emit('nhietDoSV', dataSocket)
             }
@@ -137,4 +142,26 @@ module.exports = function (io, client) {
         })
     })
     //#endregion subscribe from STM to Server and emit from Server to Client
+}
+
+function sendEmail (text, data) {
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'giathinh1228@gmail.com',
+            pass: '091115tb'
+        }
+    });
+    var mainOptions = {
+        from: 'EMSA',
+        to: 'giathinh1228@gmail.com',
+        subject: `Cảnh báo ${text}`,
+        text: `${text} quá mức quy định (${data})`,
+        html: ''
+    }
+    transporter.sendMail(mainOptions, function (err, info) {
+        if (err) {
+            console.log(err);
+        }
+    });
 }

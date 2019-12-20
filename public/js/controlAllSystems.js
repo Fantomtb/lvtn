@@ -16,6 +16,7 @@ $('#btnOffNhietDo').click(function () {
 })
 $('#btnSetMucND').click(function () {
     canhBaoCaoND = $('#inputMucND').val()
+    socket.emit('setMucNDVS', canhBaoCaoND)
 })
 
 // anh sang

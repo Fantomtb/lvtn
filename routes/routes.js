@@ -112,18 +112,3 @@ function isLoggedIn(req, res, next) {
         return next();
     res.redirect('/login')
 }
-function isLoggedInHome(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/introduction')
-}
-function isLoggedInStreetLight(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.render('pages/streetLightFake')
-}
-function isLoggedInTrafficLamp(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.render('pages/trafficLampFake')
-}
