@@ -8,6 +8,9 @@ var quatController = require('../controllers/quatController')
 var nodemailer = require('nodemailer')
 
 var mucNhietDo = 0
+var mucDoDat = 0
+var mucDoKhi = 0
+var mucAnhSang = 0
 module.exports = function (io, client) {
 
     //#region Listen from View to Server and publish from Server to STM
@@ -22,14 +25,17 @@ module.exports = function (io, client) {
         })
         socket.on('setMucDDVS', function (data) {
             console.log(data)
+            mucDoDat = parseFloat(data)
             client.publish('setMucDDT', data, { qos: 2 })
         })
         socket.on('setMucDKVS', function (data) {
             console.log(data)
+            mucDoKhi = parseFloat(data)
             client.publish('setMucDKT', data, { qos: 2 })
         })
         socket.on('setMucASVS', function (data) {
             console.log(data)
+            mucAnhSang = parseFloat(data)
             client.publish('setMucAST', data, { qos: 2 })
         })
         socket.on('doDatVS', function (data) {
@@ -93,6 +99,9 @@ module.exports = function (io, client) {
             if (topic == 'doDatH') {
                 var dataSocket = dataClient.toString()
                 cbDdController(dataSocket)
+                if (parseFloat(dataSocket) >= mucDoDat && mucDoDat > 0) {
+                    sendEmail('Độ đất', dataSocket)
+                }
                 io.emit('doDatSV', dataSocket)
             }
 
@@ -111,12 +120,18 @@ module.exports = function (io, client) {
             if (topic == 'anhSangH') {
                 var dataSocket = dataClient.toString()
                 cbAsController(dataSocket)
+                if (parseFloat(dataSocket) >= mucAnhSang && mucAnhSang > 0) {
+                    sendEmail('Ánh Sáng', dataSocket)
+                }
                 console.log(dataSocket)
                 io.emit('anhSangSV', dataSocket)
             }
             if (topic == 'doKhiH') {
                 var dataSocket = dataClient.toString()
                 cbDkController(dataSocket)
+                if (parseFloat(dataSocket) >= mucDoKhi && mucDoKhi > 0) {
+                    sendEmail('Độ Khí', dataSocket)
+                }
                 io.emit('doKhiSV', dataSocket)
             }
             if (topic == 'denH1') {

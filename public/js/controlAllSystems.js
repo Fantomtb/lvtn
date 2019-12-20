@@ -28,6 +28,7 @@ $('#btnOffAnhSang').click(function () {
 })
 $('#btnSetMucAS').click(function(){
     canhBaoCaoAS = $('#inputMucAS').val()
+    socket.emit('setMucASVS', canhBaoCaoAS)
 })
 
 // do am dat
@@ -39,6 +40,7 @@ $('#btnOffDoDat').click(function () {
 })
 $('#btnSetMucDD').click(function(){
     canhBaoCaoDD = $('#inputMucDD').val()
+    socket.emit('setMucDDVS', canhBaoCaoDD)
 })
 
 // do am khong khi
@@ -50,6 +52,7 @@ $('#btnOffDoKhi').click(function(){
 })
 $('#btnSetMucDK').click(function(){
     canhBaoCaoDK = $('#inputMucDK').val()
+    socket.emit('setMucDKVS', canhBaoCaoDK)
 })
 
 $('#btnOnQuat').click(function () {
@@ -202,7 +205,7 @@ $('#btnShowDataNhietDo').click(function () {
                     <tr>
                         <th>${row.day}</th>
                         <th>${row.time}</th>
-                        <th>${row.chiSo}</th>
+                        <th>${row.chiSo.slice(0, 2)}.${row.chiSo.slice(2)}</th>
                     </tr>
                 `)
                 dataChart.push(row.chiSo)
@@ -213,8 +216,7 @@ $('#btnShowDataNhietDo').click(function () {
                 type: 'line',
                 data: {
                     labels: labelsChart,
-                    datasets: [{
-                        label: "Sessions",
+                    datasets: [{ label: "Sessions",
                         lineTension: 0.3,
                         backgroundColor: "rgba(2,117,216,0.2)",
                         borderColor: "rgba(2,117,216,1)",
