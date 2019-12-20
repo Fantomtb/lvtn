@@ -4,23 +4,23 @@ var DoKhis = require('../api/models/cbDkModel')
 var DoDats = require('../api/models/cbDdModel')
 module.exports = function (app, passport) {
 
-    app.get(['/', '/home'], function (req, res) {
+    app.get(['/', '/home'], isLoggedIn, function (req, res) {
         res.render('pages/home')
     })
 
-    app.get('/nhietdo', function (req, res) {
+    app.get('/nhietdo', isLoggedIn, function (req, res) {
         res.render('pages/nhietDo')
     })
 
-    app.get('/anhsang', function (req, res) {
+    app.get('/anhsang', isLoggedIn, function (req, res) {
         res.render('pages/anhSang')
     })
 
-    app.get('/dodat', function (req, res) {
+    app.get('/dodat', isLoggedIn, function (req, res) {
         res.render('pages/doDat')
     })
 
-    app.get('/dokhi', function (req, res) {
+    app.get('/dokhi', isLoggedIn, function (req, res) {
         res.render('pages/doKhi')
     })
 
@@ -45,7 +45,7 @@ module.exports = function (app, passport) {
         res.render('test')
     })
 
-    app.get('/nhietdo/lichsu', async function (req, res) {
+    app.get('/nhietdo/lichsu', isLoggedIn, async function (req, res) {
         var temp_history = [];
         console.log('start')
         await NhietDos.find({ viTri: '1' }, function (err, results) {
@@ -61,7 +61,7 @@ module.exports = function (app, passport) {
             res.status(200).send(temp_history)
         })
     })
-    app.get('/anhsang/lichsu', async function (req, res) {
+    app.get('/anhsang/lichsu', isLoggedIn, async function (req, res) {
         var temp_history = [];
         await AnhSangs.find({ viTri: '1' }, function (err, results) {
             if (err) {
@@ -76,7 +76,7 @@ module.exports = function (app, passport) {
         })
     })
 
-    app.get('/dodat/lichsu', async function (req, res) {
+    app.get('/dodat/lichsu', isLoggedIn, async function (req, res) {
         var temp_history = [];
         await DoDats.find({ viTri: '1' }, function (err, results) {
             if (err) {
@@ -90,7 +90,7 @@ module.exports = function (app, passport) {
             res.status(200).send(temp_history)
         })
     })
-    app.get('/dokhi/lichsu', async function (req, res) {
+    app.get('/dokhi/lichsu', isLoggedIn, async function (req, res) {
         var temp_history = [];
         await DoKhis.find({ viTri: '1' }, function (err, results) {
             if (err) {
